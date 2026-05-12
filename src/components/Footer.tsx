@@ -3,15 +3,15 @@ import { Zap, Github, Twitter } from 'lucide-react'
 const footerLinks = [
   {
     title: 'Product',
-    links: ['Features', 'Download', 'Changelog', 'Roadmap'],
+    links: [{ label: 'Features', href: '/#features' }, { label: 'Download', href: '/download' }],
   },
   {
     title: 'Documentation',
-    links: ['Getting Started', 'Architecture', 'API Reference', 'Keyboard Shortcuts'],
+    links: [{ label: 'Getting Started', href: '#' }, { label: 'Architecture', href: '#' }, { label: 'API Reference', href: '#' }, { label: 'Keyboard Shortcuts', href: '#' }],
   },
   {
     title: 'Connect',
-    links: ['GitHub', 'Twitter', 'Discord', 'Email'],
+    links: [{ label: 'GitHub', href: 'https://github.com/Flamingo-Client' }, { label: 'Sync', href: '#' }],
   },
 ]
 
@@ -31,11 +31,8 @@ export default function Footer() {
               A modern, lightning-fast API client for developers who value speed and simplicity.
             </p>
             <div className="flex gap-3 mt-4">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://github.com/Flamingo-Client" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Github className="h-4 w-4" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Twitter className="h-4 w-4" />
               </a>
             </div>
           </div>
@@ -45,12 +42,12 @@ export default function Footer() {
               <h4 className="font-medium text-sm mb-3">{group.title}</h4>
               <ul className="space-y-2">
                 {group.links.map((link) => (
-                  <li key={link}>
+                  <li key={link.label}>
                     <a
-                      href="#"
+                      href={link.href}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {link}
+                      {link.label}
                     </a>
                   </li>
                 ))}
