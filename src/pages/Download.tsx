@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { Download, Monitor, Apple, Laptop, Github, ChevronRight, Terminal } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Monitor, Apple, Laptop, Github, Terminal, Clock } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 
 const platforms = [
@@ -8,28 +7,25 @@ const platforms = [
     icon: Monitor,
     name: 'Windows',
     version: 'v1.0.0',
-    size: '14.2 MB',
+    size: '—',
     type: '.exe',
     note: 'Windows 10 or later',
-    url: '#',
   },
   {
     icon: Apple,
     name: 'macOS',
     version: 'v1.0.0',
-    size: '13.8 MB',
+    size: '—',
     type: '.dmg',
     note: 'Intel & Apple Silicon',
-    url: '#',
   },
   {
     icon: Laptop,
     name: 'Linux',
     version: 'v1.0.0',
-    size: '15.1 MB',
+    size: '—',
     type: '.AppImage',
     note: 'AppImage & deb & rpm',
-    url: '#',
   },
 ]
 
@@ -39,7 +35,7 @@ const otherMethods = [
 ]
 
 const releases = [
-  { version: 'v1.0.0', date: 'May 12, 2026', notes: 'Initial release. Full HTTP client, 7 methods, 4 auth types, 6 body formats, 5 response views, collections with nested folders, environment variables, request history (200 entries), multi-tab workflow, cURL import, command palette, light/dark themes, Monaco editor, offline-first with localStorage persistence, and E2E-encrypted cloud sync.' },
+  { version: 'v1.0.0', date: 'Coming soon', notes: 'Initial release. Full HTTP client, 7 methods, 4 auth types, 6 body formats, 5 response views, collections with nested folders, environment variables, request history (200 entries), multi-tab workflow, cURL import, command palette, light/dark themes, Monaco editor, offline-first with localStorage persistence, and E2E-encrypted cloud sync.' },
 ]
 
 export default function DownloadPage() {
@@ -55,7 +51,8 @@ export default function DownloadPage() {
           <Badge variant="default" className="mb-4">Free & Open Source</Badge>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Download Flamingo</h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-            Choose your platform and get started in seconds. No account required.
+            Flamingo is currently in development and will be available soon.
+            Join the waitlist or build from source to get early access.
           </p>
         </motion.div>
 
@@ -93,12 +90,10 @@ export default function DownloadPage() {
                 <span>{platform.type}</span>
               </div>
               <p className="text-xs text-muted-foreground mb-6">{platform.note}</p>
-              <a href={platform.url}>
-                <Button variant="primary" className="w-full gap-2 group/btn">
-                  <Download className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
-                  Download for {platform.name}
-                </Button>
-              </a>
+              <div className="w-full flex items-center justify-center gap-2 rounded-lg border border-dashed border-muted-foreground/30 bg-muted/30 py-2.5 px-4 text-sm text-muted-foreground">
+                <Clock className="h-4 w-4" />
+                Coming Soon
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -112,7 +107,7 @@ export default function DownloadPage() {
         >
           <div className="flex items-center gap-3 mb-6">
             <Github className="h-5 w-5" />
-            <h2 className="text-lg font-semibold">Other installation methods</h2>
+            <h2 className="text-lg font-semibold">Early access</h2>
           </div>
           <div className="space-y-3">
             {otherMethods.map((method) => (
@@ -126,6 +121,16 @@ export default function DownloadPage() {
                 </pre>
               </div>
             ))}
+            <div className="p-4 rounded-lg border border-dashed border-primary/30 bg-primary/5">
+              <div className="flex items-center gap-2 mb-2">
+                <Terminal className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium text-primary">Stay updated</span>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                The first public release is in active development. Watch the repository or follow
+                <span className="text-foreground"> @flamingo</span> for release announcements. Pre-built binaries for all platforms will be available at launch.
+              </p>
+            </div>
           </div>
         </motion.div>
 
