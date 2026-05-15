@@ -7,11 +7,11 @@ const footerLinks = [
   },
   {
     title: 'Documentation',
-    links: [{ label: 'Getting Started', href: '#' }, { label: 'Architecture', href: '#' }, { label: 'API Reference', href: '#' }, { label: 'Keyboard Shortcuts', href: '#' }],
+    links: [{ label: 'Getting Started', href: 'https://docs.flamingo-client.com/getting-started' }, { label: 'Architecture', href: 'https://docs.flamingo-client.com/architecture' }, { label: 'Scripting API ref', href: 'https://docs.flamingo-client.com/request-building/scripts/' }, { label: 'Keyboard Shortcuts', href: 'https://docs.flamingo-client.com/power-features/keyboard-shortcuts/' }],
   },
   {
     title: 'Connect',
-    links: [{ label: 'GitHub', href: 'https://github.com/Flamingo-Client' }, { label: 'Sync', href: '#' }],
+    links: [{ label: 'GitHub', href: 'https://github.com/Flamingo-Client' }, { label: 'Sync', href: 'https://sync.flamingo-client.com/login' }],
   },
 ]
 

@@ -48,7 +48,7 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-2 font-semibold text-lg">
-            <img src="/favicon.svg" alt="Flamingo logo SVG" className='h-10'/>
+            <img src="/favicon.svg" alt="Flamingo logo SVG" className='h-10' />
             Flamingo
           </Link>
 
@@ -102,9 +102,9 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="pt-2">
-                <Link to="/download" className="block">
-                  <Button variant="primary" className="w-full">
-                    Download
+                <Link to="https://sync.flamingo-client.com/login" target="_blank" rel="block">
+                  <Button variant="primary" size="sm">
+                    Log In to Sync
                   </Button>
                 </Link>
               </div>
