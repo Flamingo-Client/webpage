@@ -1,41 +1,48 @@
 import { motion } from 'framer-motion'
-import { Monitor, Apple, Laptop, Github, Terminal, Clock } from 'lucide-react'
+import { Monitor, Apple, Laptop, Github, Terminal, Download, ShieldQuestion } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+
+const GH = 'https://github.com/Flamingo-Client/Flamingo'
 
 const platforms = [
   {
     icon: Monitor,
     name: 'Windows',
-    version: 'v1.0.0',
+    version: 'v0.1.0',
     size: '—',
     type: '.exe',
     note: 'Windows 10 or later',
+    url: `${GH}/releases/download/v0.1.0/Flamingo-Setup-0.1.0.exe`,
   },
   {
     icon: Apple,
     name: 'macOS',
-    version: 'v1.0.0',
+    version: 'v0.1.0',
     size: '—',
     type: '.dmg',
     note: 'Intel & Apple Silicon',
+    url: `${GH}/releases`,
+    custom: true
   },
   {
     icon: Laptop,
     name: 'Linux',
-    version: 'v1.0.0',
+    version: 'v0.1.0',
     size: '—',
     type: '.AppImage',
     note: 'AppImage & deb & rpm',
+    url: `${GH}/releases`,
   },
 ]
 
 const otherMethods = [
-  { name: 'Build from source', cmd: 'git clone https://github.com/flamingo/flamingo\ncd flamingo\nnpm install\nnpm run electron:build', icon: Github },
-  { name: 'Run in browser (dev)', cmd: 'git clone https://github.com/flamingo/flamingo\ncd flamingo\nnpm install\nnpm run dev\n# opens at http://localhost:5173', icon: Terminal },
+  { name: 'Build from source', cmd: `git clone ${GH}.git\ncd flamingo\nnpm install\nnpm run electron:build`, icon: Github },
+  { name: 'Run in browser (dev)', cmd: `git clone ${GH}.git\ncd flamingo\nnpm install\nnpm run dev\n# opens at http://localhost:5173`, icon: Terminal },
 ]
 
 const releases = [
-  { version: 'v1.0.0', date: 'Coming soon', notes: 'Initial release. Full HTTP client, 7 methods, 4 auth types, 6 body formats, 5 response views, collections with nested folders, environment variables, request history (200 entries), multi-tab workflow, cURL import, command palette, light/dark themes, Monaco editor, offline-first with localStorage persistence, and E2E-encrypted cloud sync.' },
+  { version: 'v0.1.0', date: '15/05/2026', notes: 'Flamingo Client Is now available for download! Star us on GitHub! Report any issues you encounter on our GitHub issues page, we appreciate your feedback.' },
 ]
 
 export default function DownloadPage() {
@@ -51,9 +58,21 @@ export default function DownloadPage() {
           <Badge variant="default" className="mb-4">Free & Open Source</Badge>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">Download Flamingo</h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-            Flamingo is currently in development and will be available soon.
-            Join the waitlist or build from source to get early access.
+            Choose your platform and get started in seconds. No account required.
           </p>
+          <div className="rounded-xl border border-border bg-card p-6 mt-8 flex gap-5 text-sm text-left">
+            <div className="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
+              <ShieldQuestion className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="font-semibold text-foreground mb-2">
+                Why is Windows Defender protecting my computer?
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Since Flamingo doesn't generate profit yet and isn't widely distributed, it has a low reputation score with antivirus software. This can trigger false positives. We're actively working on code signing to resolve this. In the meantime, you can safely ignore the warning or add an exception for Flamingo in your antivirus settings.
+              </p>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
@@ -90,10 +109,21 @@ export default function DownloadPage() {
                 <span>{platform.type}</span>
               </div>
               <p className="text-xs text-muted-foreground mb-6">{platform.note}</p>
-              <div className="w-full flex items-center justify-center gap-2 rounded-lg border border-dashed border-muted-foreground/30 bg-muted/30 py-2.5 px-4 text-sm text-muted-foreground">
-                <Clock className="h-4 w-4" />
-                Coming Soon
-              </div>
+              {platform.custom ? (
+                <a href="https://docs.flamingo-client.com/building/macos/" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="w-full gap-2 group/btn">
+                    <Terminal className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
+                    Build it yourself
+                  </Button>
+                </a>
+              ) : (
+                <a href={platform.url}>
+                  <Button variant="primary" className="w-full gap-2 group/btn">
+                    <Download className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
+                    Download for {platform.name}
+                  </Button>
+                </a>
+              )}
             </motion.div>
           ))}
         </motion.div>
@@ -105,10 +135,10 @@ export default function DownloadPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="flex items-center gap-3 mb-6">
+          <a href={GH} className="flex items-center gap-3 mb-6 hover:opacity-80 transition-opacity">
             <Github className="h-5 w-5" />
             <h2 className="text-lg font-semibold">Early access</h2>
-          </div>
+          </a>
           <div className="space-y-3">
             {otherMethods.map((method) => (
               <div key={method.name} className="p-4 rounded-lg bg-muted/50">
@@ -127,8 +157,7 @@ export default function DownloadPage() {
                 <span className="text-sm font-medium text-primary">Stay updated</span>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                The first public release is in active development. Watch the repository or follow
-                <span className="text-foreground"> @flamingo</span> for release announcements. Pre-built binaries for all platforms will be available at launch.
+                Check the <a href={`${GH}/releases`} className="text-primary hover:underline">GitHub releases page</a> for all available downloads and release notes.
               </p>
             </div>
           </div>
