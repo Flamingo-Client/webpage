@@ -13,7 +13,7 @@ const platforms = [
     size: '—',
     type: '.exe',
     note: 'Windows 10 or later',
-    url: `${GH}/releases/download/v0.1.0/Flamingo-Setup-0.1.0.exe`,
+    url: `${GH}/releases/`,
   },
   {
     icon: Apple,
