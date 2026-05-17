@@ -42,7 +42,7 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
         >
           <Badge variant="default" className="mb-6">
-            v1.0.0 — Free & Open Source
+            Free & Open Source
           </Badge>
         </motion.div>
 
