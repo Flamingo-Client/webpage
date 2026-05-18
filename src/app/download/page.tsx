@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import { Monitor, Apple, Laptop, Github, Terminal, Download, ShieldQuestion } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
@@ -45,7 +47,6 @@ const releases = [
   { version: 'v0.2.1', date: '15/05/2026', notes: 'Minor visual bug fixes.' },
   { version: 'v0.2.0', date: '15/05/2026', notes: 'A new feature has arrived! You can now save and organize your API requests into folders while keeping the experience lightweight, fast, and distraction-free.' },
   { version: 'v0.1.0', date: '15/05/2026', notes: 'Flamingo Client Is now available for download! Star us on GitHub! Report any issues you encounter on our GitHub issues page, we appreciate your feedback.' },
-
 ]
 
 export default function DownloadPage() {
@@ -72,7 +73,7 @@ export default function DownloadPage() {
                 Why is Windows Defender protecting my computer?
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Since Flamingo doesn't generate profit yet and isn't widely distributed, it has a low reputation score with antivirus software. This can trigger false positives. We're actively working on code signing to resolve this. In the meantime, you can safely ignore the warning or add an exception for Flamingo in your antivirus settings.
+                Since Flamingo doesn&apos;t generate profit yet and isn&apos;t widely distributed, it has a low reputation score with antivirus software. This can trigger false positives. We&apos;re actively working on code signing to resolve this. In the meantime, you can safely ignore the warning or add an exception for Flamingo in your antivirus settings.
               </p>
             </div>
           </div>
