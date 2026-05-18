@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import { Send, Eye, FolderTree, Beaker, History, Layout, Code2, Palette, Command } from 'lucide-react'
 

@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom'
+'use client'
+
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowDown, Download, Zap, GitFork, Layers, Monitor } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -74,7 +76,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          <Link to="/download">
+          <Link href="/download">
             <Button variant="primary" size="xl" className="gap-2 group">
               <Download className="h-5 w-5 group-hover:scale-110 transition-transform" />
               Download Free

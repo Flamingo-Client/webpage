@@ -1,4 +1,6 @@
-import { Zap, Github, Twitter } from 'lucide-react'
+'use client'
+
+import { Zap, Github } from 'lucide-react'
 
 const footerLinks = [
   {
