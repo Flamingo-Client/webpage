@@ -9,16 +9,16 @@ const platforms = [
   {
     icon: Monitor,
     name: 'Windows',
-    version: 'v0.2.0',
-    size: '93.55 MB',
+    version: 'v0.2.1',
+    size: '113 MB',
     type: '.exe',
     note: 'Windows 10 or later',
-    url: `https://github.com/Flamingo-Client/Flamingo/releases/download/Beta-0.2.0/Flamingo.Setup.0.2.0.exe`,
+    url: `https://github.com/Flamingo-Client/Flamingo/releases/download/0.2.1/Flamingo.Setup.0.2.1.exe`,
   },
   {
     icon: Apple,
     name: 'macOS',
-    version: 'v0.2.0',
+    version: 'v0.2.1',
     size: 'Build it yourself',
     type: '.dmg',
     note: 'Intel & Apple Silicon',
@@ -28,11 +28,11 @@ const platforms = [
   {
     icon: Laptop,
     name: 'Linux',
-    version: 'v0.2.0',
-    size: '128.88 MB',
+    version: 'v0.2.1',
+    size: '140 MB',
     type: '.AppImage',
     note: 'AppImage & deb & rpm',
-    url: `https://github.com/Flamingo-Client/Flamingo/releases/download/Beta-0.2.0/Flamingo-0.2.0.AppImage`,
+    url: `https://github.com/Flamingo-Client/Flamingo/releases/download/0.2.1/Flamingo-0.2.1.AppImage`,
   },
 ]
 
@@ -42,6 +42,7 @@ const otherMethods = [
 ]
 
 const releases = [
+  { version: 'v0.2.1', date: '15/05/2026', notes: 'Minor visual bug fixes.' },
   { version: 'v0.2.0', date: '15/05/2026', notes: 'A new feature has arrived! You can now save and organize your API requests into folders while keeping the experience lightweight, fast, and distraction-free.' },
   { version: 'v0.1.0', date: '15/05/2026', notes: 'Flamingo Client Is now available for download! Star us on GitHub! Report any issues you encounter on our GitHub issues page, we appreciate your feedback.' },
 
