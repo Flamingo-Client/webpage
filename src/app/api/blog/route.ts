@@ -8,7 +8,7 @@ export async function GET() {
   if (!token) return NextResponse.json({ error: 'GITHUB_TOKEN not configured' }, { status: 500 })
 
   try {
-    const res = await fetch(API, { headers: getGhHeaders(token), next: { revalidate: 3600 } })
+    const res = await fetch(API, { headers: getGhHeaders(token) })
     if (!res.ok) return NextResponse.json({ error: 'GitHub API error' }, { status: res.status })
 
     const items: { name: string; type: string }[] = await res.json()

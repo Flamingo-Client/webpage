@@ -11,7 +11,6 @@ export async function GET(_: Request, { params }: { params: Promise<{ slug: stri
   try {
     const res = await fetch(`${API}/${slug}/index.mdx`, {
       headers: getGhHeaders(token),
-      next: { revalidate: 3600 },
     })
     if (!res.ok) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 

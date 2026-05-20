@@ -15,7 +15,6 @@ export async function GET() {
         Accept: 'application/vnd.github+json',
         Authorization: `Bearer ${token}`,
       },
-      next: { revalidate: 3600 },
     })
 
     if (!res.ok) {
