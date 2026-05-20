@@ -7,6 +7,8 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import type { GitHubData, GitHubRelease } from '@/lib/github'
 import { parsePlatforms, parseReleases } from '@/lib/github'
+import { trackEvent } from '@/lib/gtag'
+
 
 const platformIcons = { Windows: Monitor, macOS: Apple, Linux: Laptop } as const
 
@@ -14,6 +16,13 @@ const otherMethods = [
   { name: 'Build from source', cmd: `git clone https://github.com/Flamingo-Client/Flamingo.git\ncd flamingo\nnpm install\nnpm run electron:build`, icon: Github },
   { name: 'Run in browser (dev)', cmd: `git clone https://github.com/Flamingo-Client/Flamingo.git\ncd flamingo\nnpm install\nnpm run dev\n# opens at http://localhost:5173`, icon: Terminal },
 ]
+
+const trackDownloadClick = (platform: string, url: string) => {
+  trackEvent('download_click', {
+    platform,
+    url
+  })
+}
 
 export default function DownloadContent({ initial }: { initial: GitHubData }) {
   const [data, setData] = useState<GitHubData>(initial)
@@ -30,7 +39,7 @@ export default function DownloadContent({ initial }: { initial: GitHubData }) {
           releases: parseReleases(releases),
         })
       })
-      .catch(() => {})
+      .catch(() => { })
     return () => { cancelled = true }
   }, [])
 
@@ -109,7 +118,7 @@ export default function DownloadContent({ initial }: { initial: GitHubData }) {
                     </Button>
                   </a>
                 ) : (
-                  <a href={platform.url}>
+                  <a href={platform.url} onClick={() => trackDownloadClick(platform.name, platform.url)} >
                     <Button variant="primary" className="w-full gap-2 group/btn">
                       <Download className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
                       Download for {platform.name}
@@ -190,7 +199,7 @@ export default function DownloadContent({ initial }: { initial: GitHubData }) {
                       className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
                     >
                       Read more
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10"/><path d="M7 17 21 3"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10" /><path d="M7 17 21 3" /></svg>
                     </a>
                   )}
                 </div>
