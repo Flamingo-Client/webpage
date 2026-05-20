@@ -1,21 +1,25 @@
+'use client'
+
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { Menu, X, Zap } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const navLinks = [
   { label: 'Features', href: '/#features' },
   { label: 'Specs', href: '/#characteristics' },
   { label: 'Usage', href: '/#usage' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Download', href: '/download' },
 ]
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const location = useLocation()
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -25,12 +29,12 @@ export default function Navbar() {
 
   useEffect(() => {
     setIsOpen(false)
-  }, [location])
+  }, [pathname])
 
   const handleNavClick = (href: string) => {
     if (href.startsWith('/#')) {
       const id = href.slice(2)
-      if (location.pathname === '/') {
+      if (pathname === '/') {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
       }
     }
@@ -47,7 +51,7 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 font-semibold text-lg">
+          <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
             <img src="/favicon.svg" alt="Flamingo logo SVG" className='h-10' />
             Flamingo
           </Link>
@@ -56,7 +60,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <Link
                 key={link.href}
-                to={link.href}
+                href={link.href}
                 onClick={() => handleNavClick(link.href)}
                 className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-accent"
               >
@@ -64,11 +68,11 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="ml-4">
-              <Link to="https://sync.flamingo-client.com/login" target="_blank" rel="noopener noreferrer">
+              <a href="https://sync.flamingo-client.com/login" target="_blank" rel="noopener noreferrer">
                 <Button variant="primary" size="sm">
                   Log In to Sync
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -94,7 +98,7 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  to={link.href}
+                  href={link.href}
                   onClick={() => handleNavClick(link.href)}
                   className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-accent"
                 >
@@ -102,11 +106,11 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="pt-2">
-                <Link to="https://sync.flamingo-client.com/login" target="_blank" rel="block">
+                <a href="https://sync.flamingo-client.com/login" target="_blank" rel="noopener noreferrer">
                   <Button variant="primary" size="sm">
                     Log In to Sync
                   </Button>
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>

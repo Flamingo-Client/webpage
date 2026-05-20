@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom'
+'use client'
+
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Download, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -44,7 +46,7 @@ export default function CallToAction() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Link to="/download">
+          <Link href="/download">
             <Button variant="primary" size="xl" className="gap-2 group">
               <Download className="h-5 w-5 group-hover:scale-110 transition-transform" />
               Download Now

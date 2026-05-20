@@ -1,10 +1,10 @@
 import type { Config } from 'tailwindcss'
+import pkg from "@tailwindcss/typography"
 
 const config: Config = {
   darkMode: ['class'],
   content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     container: {
@@ -52,7 +52,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['Onest', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Cascadia Code', 'Consolas', 'monospace'],
+        mono: ['GoogleSansCode', 'JetBrains Mono', 'Cascadia Code', 'Consolas', 'monospace'],
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -85,7 +85,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [pkg],
 }
 
 export default config
