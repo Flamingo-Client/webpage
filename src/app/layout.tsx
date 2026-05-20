@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import 'highlight.js/styles/github-dark.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
