@@ -5,6 +5,8 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ConsentBanner from '@/components/ConsentBanner'
 
+import { Analytics } from '@vercel/analytics/react'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.flamingo-client.com/landing'),
   title: 'Flamingo - Modern API Client',
@@ -41,6 +43,7 @@ export default function RootLayout({
       </head>
       <body>
         <div className="flex min-h-screen flex-col">
+          <Analytics />
           <Navbar />
           <main className="flex-1">
             {children}
