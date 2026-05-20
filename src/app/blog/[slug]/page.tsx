@@ -139,7 +139,7 @@ export default function BlogPostPage() {
           )}
 
           <div
-            className="prose prose-sm dark:prose-invert max-w-none
+            className="prose prose-md dark:prose-invert max-w-none
               [&_h1]:text-3xl [&_h1]:font-semibold [&_h1]:tracking-tight [&_h1]:text-foreground [&_h1]:mt-10 [&_h1]:mb-4
               [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:text-foreground [&_h2]:mt-8 [&_h2]:mb-3
               [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-foreground [&_h3]:mt-6 [&_h3]:mb-2
