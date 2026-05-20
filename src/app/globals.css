@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'GoogleSansCode';
+  src: url('/GoogleSansCode.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -65,7 +73,7 @@
   }
 
   code, pre, .font-mono {
-    font-family: 'JetBrains Mono', 'Cascadia Code', 'Consolas', monospace;
+    font-family: 'GoogleSansCode', 'JetBrains Mono', 'Cascadia Code', 'Consolas', monospace;
   }
 
   ::selection {

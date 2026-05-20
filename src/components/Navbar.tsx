@@ -12,6 +12,7 @@ const navLinks = [
   { label: 'Features', href: '/#features' },
   { label: 'Specs', href: '/#characteristics' },
   { label: 'Usage', href: '/#usage' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Download', href: '/download' },
 ]
 
