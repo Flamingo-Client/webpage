@@ -3,6 +3,7 @@ import './globals.css'
 import 'highlight.js/styles/github-dark.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.flamingo-client.com/landing'),
@@ -33,14 +34,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLS1JNY8GN"></script>
-        <script>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-NLS1JNY8GN"></Script>
+        <Script id="google-analytics">
+          {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
           gtag('config', 'G-NLS1JNY8GN');
-        </script>
+          `}
+        </Script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet" />
