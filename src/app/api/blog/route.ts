@@ -1,15 +1,31 @@
 import { NextResponse } from 'next/server'
 import { getGhHeaders, renderMdx } from '@/lib/blog'
+import { checkRateLimit, getIp } from '@/lib/rate-limit'
 
 const API = 'https://api.github.com/repos/Flamingo-Client/blog/contents'
 
-export async function GET() {
+const corsHeaders = { 'Access-Control-Allow-Origin': '*' }
+
+export async function OPTIONS() {
+  return NextResponse.json(null, { headers: corsHeaders })
+}
+
+export async function GET(request: Request) {
+  const ip = getIp(request)
+  const result = checkRateLimit(ip)
+  if (!result.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests. Try again later.' },
+      { status: 429, headers: { ...corsHeaders, 'Retry-After': String(Math.ceil(result.resetIn / 1000)) } }
+    )
+  }
+
   const token = process.env.GITHUB_TOKEN
-  if (!token) return NextResponse.json({ error: 'GITHUB_TOKEN not configured' }, { status: 500 })
+  if (!token) return NextResponse.json({ error: 'GITHUB_TOKEN not configured' }, { status: 500, headers: corsHeaders })
 
   try {
     const res = await fetch(API, { headers: getGhHeaders(token) })
-    if (!res.ok) return NextResponse.json({ error: 'GitHub API error' }, { status: res.status })
+    if (!res.ok) return NextResponse.json({ error: 'GitHub API error' }, { status: res.status, headers: corsHeaders })
 
     const items: { name: string; type: string }[] = await res.json()
     const dirs = items.filter((i) => i.type === 'dir').slice(0, 10)
@@ -31,8 +47,8 @@ export async function GET() {
       })
     )
 
-    return NextResponse.json(posts.filter(Boolean))
+    return NextResponse.json(posts.filter(Boolean), { headers: corsHeaders })
   } catch {
-    return NextResponse.json({ error: 'Failed to fetch blog posts' }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to fetch blog posts' }, { status: 500, headers: corsHeaders })
   }
 }
