@@ -1,6 +1,7 @@
 'use client'
 
-import { Zap, Github } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Zap, Github, Moon, Sun } from 'lucide-react'
 
 const footerLinks = [
   {
@@ -16,6 +17,35 @@ const footerLinks = [
     links: [{ label: 'GitHub', href: 'https://github.com/Flamingo-Client' }, { label: 'Sync', href: 'https://sync.flamingo-client.com/login' }],
   },
 ]
+
+function ThemeToggle() {
+  const [dark, setDark] = useState(false)
+
+  useEffect(() => {
+    const stored = localStorage.getItem('flamingo-theme')
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isDark = stored ? stored === 'dark' : prefersDark
+    setDark(isDark)
+    document.documentElement.classList.toggle('dark', isDark)
+  }, [])
+
+  const toggle = () => {
+    const next = !dark
+    setDark(next)
+    document.documentElement.classList.toggle('dark', next)
+    localStorage.setItem('flamingo-theme', next ? 'dark' : 'light')
+  }
+
+  return (
+    <button
+      onClick={toggle}
+      className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors"
+    >
+      {dark ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+      {dark ? 'Light mode' : 'Dark mode'}
+    </button>
+  )
+}
 
 export default function Footer() {
   return (
@@ -62,9 +92,13 @@ export default function Footer() {
           <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} Flamingo. All rights reserved.
           </p>
-          <p className="text-xs text-muted-foreground">
-            Built with passion for the API community.
-          </p>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <span className="text-muted-foreground/30">|</span>
+            <p className="text-xs text-muted-foreground">
+              Built with passion for the API community.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

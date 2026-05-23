@@ -54,6 +54,14 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 217 91% 60%;
+
+    --sidebar-bg: 240 10% 5.9%;
+    --sidebar-foreground: 240 5% 64.9%;
+    --sidebar-muted: 240 5% 26%;
+    --sidebar-border: 240 5% 12%;
+
+    --titlebar-bg: 240 10% 5.9%;
+    --titlebar-border: 240 5% 12%;
   }
 }
 
