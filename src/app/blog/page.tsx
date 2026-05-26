@@ -14,6 +14,11 @@ function AuthorBadge({ author }: { author: Author }) {
   )
 }
 
+function parseDate (dateStr: string) {
+  const [day, month, year] = dateStr.split('/').map(Number)
+  return new Date(year, month - 1, day).getTime()
+}
+
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPostMeta[]>([])
   const [loading, setLoading] = useState(true)
@@ -21,7 +26,15 @@ export default function BlogPage() {
   useEffect(() => {
     fetch('/api/blog')
       .then((r) => r.json())
-      .then((data) => { if (Array.isArray(data)) setPosts(data); setLoading(false) })
+      .then((data) => {
+        if (Array.isArray(data)) {
+          const sortedPosts = [...data].sort(
+            (a, b) => parseDate(b.date) - parseDate(a.date)
+          )
+          setPosts(sortedPosts)
+        }
+        setLoading(false)
+      })
       .catch(() => setLoading(false))
   }, [])
 
@@ -51,35 +64,35 @@ export default function BlogPage() {
         )}
 
         {!loading && posts.length > 0 && (
-        <div className="space-y-6">
-          {posts.map((post, i) => (
-            <motion.div
-              key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-            >
-              <Link
-                href={`/blog/${post.slug}`}
-                className="block rounded-xl border border-border bg-card p-6 hover:shadow-md hover:border-primary/30 transition-all duration-300"
+          <div className="space-y-6">
+            {posts.map((post, i) => (
+              <motion.div
+                key={post.slug}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
               >
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-xs text-muted-foreground">{post.date}</span>
-                </div>
-                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-3">{post.description}</p>
-                {post.authors && post.authors.length > 0 && (
-                  <div className="flex flex-wrap items-center gap-3">
-                    {post.authors.map((a, i) => (
-                      <AuthorBadge key={i} author={a} />
-                    ))}
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="block rounded-xl border border-border bg-card p-6 hover:shadow-md hover:border-primary/30 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-xs text-muted-foreground">{post.date}</span>
                   </div>
-                )}
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      )}
+                  <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">{post.description}</p>
+                  {post.authors && post.authors.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-3">
+                      {post.authors.map((a, i) => (
+                        <AuthorBadge key={i} author={a} />
+                      ))}
+                    </div>
+                  )}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
