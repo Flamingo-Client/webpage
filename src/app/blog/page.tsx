@@ -20,6 +20,27 @@ function parseDate (dateStr: string) {
   return new Date(year, month - 1, day).getTime()
 }
 
+function SkeletonCard() {
+  return (
+    <div className="rounded-xl border border-border bg-card overflow-hidden animate-pulse">
+      <div className="aspect-[16/9] bg-muted" />
+      <div className="p-5 space-y-3">
+        <div className="h-3 w-24 rounded bg-muted" />
+        <div className="h-5 w-3/4 rounded bg-muted" />
+        <div className="space-y-2">
+          <div className="h-3 w-full rounded bg-muted" />
+          <div className="h-3 w-5/6 rounded bg-muted" />
+          <div className="h-3 w-2/3 rounded bg-muted" />
+        </div>
+        <div className="flex items-center gap-2 pt-3 border-t border-border">
+          <div className="h-3 w-16 rounded bg-muted" />
+          <div className="h-3 w-20 rounded bg-muted" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPostMeta[]>([])
   const [loading, setLoading] = useState(true)
@@ -55,7 +76,11 @@ export default function BlogPage() {
         </motion.div>
 
         {loading && (
-          <div className="text-center text-muted-foreground py-12">Loading posts…</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
+          </div>
         )}
 
         {!loading && posts.length === 0 && (
