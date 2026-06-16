@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import type { BlogPostMeta, Author } from '@/lib/blog'
 import { motion } from 'framer-motion'
-import { Github } from 'lucide-react'
+import { Calendar, User } from 'lucide-react'
 
 function AuthorBadge({ author }: { author: Author }) {
   return (
     <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+      <User className="h-3 w-3" />
       {author.name}
     </span>
   )
@@ -40,7 +41,7 @@ export default function BlogPage() {
 
   return (
     <div className="pt-24 pb-16 min-h-screen">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -64,7 +65,7 @@ export default function BlogPage() {
         )}
 
         {!loading && posts.length > 0 && (
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post, i) => (
               <motion.div
                 key={post.slug}
@@ -74,20 +75,34 @@ export default function BlogPage() {
               >
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="block rounded-xl border border-border bg-card p-6 hover:shadow-md hover:border-primary/30 transition-all duration-300"
+                  className="group block rounded-xl border border-border bg-card hover:shadow-md hover:border-primary/30 transition-all duration-300 overflow-hidden h-full"
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-xs text-muted-foreground">{post.date}</span>
-                  </div>
-                  <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">{post.description}</p>
-                  {post.authors && post.authors.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-3">
-                      {post.authors.map((a, i) => (
-                        <AuthorBadge key={i} author={a} />
-                      ))}
+                  {post.image && (
+                    <div className="aspect-[16/9] overflow-hidden bg-muted">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
                     </div>
                   )}
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                        <Calendar className="h-3 w-3" />
+                        {post.date}
+                      </span>
+                    </div>
+                    <h2 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{post.title}</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">{post.description}</p>
+                    {post.authors && post.authors.length > 0 && (
+                      <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-border">
+                        {post.authors.map((a, i) => (
+                          <AuthorBadge key={i} author={a} />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </Link>
               </motion.div>
             ))}
