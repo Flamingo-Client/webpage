@@ -43,9 +43,11 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Badge variant="default" className="mb-6">
-            Free & Open Source
-          </Badge>
+          <a href="https://web.flamingo-client.com/">
+            <Badge variant="default" className="mb-6">
+              Try the web version now!
+            </Badge>
+          </a>
         </motion.div>
 
         <motion.h1
