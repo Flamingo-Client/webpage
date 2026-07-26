@@ -14,6 +14,7 @@ const navLinks = [
   { label: 'Usage', href: '/#usage' },
   { label: 'Blog', href: '/blog' },
   { label: 'Download', href: '/download' },
+  { label: 'Try web', href: 'https://web.flamingo-client.com', isNew: true },
 ]
 
 export default function Navbar() {
@@ -62,9 +63,18 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-accent"
+                className={cn(
+                  'relative px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-accent',
+                  link.isNew && 'nav-link-new'
+                )}
               >
                 {link.label}
+                {link.isNew && (
+                  <span className="new-badge">
+                    <span className="new-badge-dot" />
+                    New
+                  </span>
+                )}
               </Link>
             ))}
             <div className="ml-4">
@@ -100,9 +110,18 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => handleNavClick(link.href)}
-                  className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-accent"
+                  className={cn(
+                    'relative flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-accent',
+                    link.isNew && 'nav-link-new'
+                  )}
                 >
                   {link.label}
+                  {link.isNew && (
+                    <span className="new-badge">
+                      <span className="new-badge-dot" />
+                      Nuevo
+                    </span>
+                  )}
                 </Link>
               ))}
               <div className="pt-2">
